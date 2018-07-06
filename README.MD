@@ -77,6 +77,11 @@ If you do not specify the Service Scope/Lifetime, ServiceSharp will use the defa
 	}
 ```
 
+Demo result of the Service Lifetime:
+
+![](https://i.imgur.com/eAjC1lC.png)
+![](https://i.imgur.com/x2QMjDp.png)
+
 # Additional Assemblies
 
 Without any options specified, `GetEntryAssembly()` is used to search for classes that implement `IService`. If you want to inject `Service`s in your other assemblies (libraries) too, you can specify it in the options:
