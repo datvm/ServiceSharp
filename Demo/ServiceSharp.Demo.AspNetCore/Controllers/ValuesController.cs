@@ -16,9 +16,9 @@ namespace ServiceSharp.Demo.AspNetCore.Controllers
         FreshCounter freshCounter;
         PerRequestCounter perRequestCounter;
         LifetimeCounter lifetimeCounter;
-        TimeService timeService;
+        ITimeService timeService;
 
-        public ValuesController(FreshCounter freshCounter, PerRequestCounter perRequestCounter, LifetimeCounter lifetimeCounter, TimeService timeService)
+        public ValuesController(FreshCounter freshCounter, PerRequestCounter perRequestCounter, LifetimeCounter lifetimeCounter, ITimeService timeService)
         {
             this.freshCounter = freshCounter;
             this.perRequestCounter = perRequestCounter;

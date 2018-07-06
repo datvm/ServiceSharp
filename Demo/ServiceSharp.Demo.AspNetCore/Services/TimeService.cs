@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 namespace ServiceSharp.Demo.AspNetCore.Services
 {
 
-    public class TimeService : IService
+    public interface ITimeService : IService
+    {
+        DateTime GetCurrentTime();
+    }
+
+    public class TimeService : ITimeService, IService<ITimeService>
     {
 
         public DateTime GetCurrentTime()

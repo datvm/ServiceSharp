@@ -5,6 +5,6 @@ namespace ServiceSharp
 
     public interface IService { }
 
-    public interface IServer<T> : IService { }
+    public interface IService<TInterface> : IService { }
 
 }
