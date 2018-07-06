@@ -10,6 +10,7 @@
     <RepositoryUrl>https://github.com/datvm/ServiceSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>service repository design pattern</PackageTags>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>

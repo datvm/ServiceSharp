@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 namespace ServiceSharp.Demo.AspNetCore.Services
 {
 
-    public class PerRequestCounter : IService
+    [Service]
+    public class PerRequestCounter
     {
 
         private int counter;

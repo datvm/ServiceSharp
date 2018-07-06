@@ -12,11 +12,11 @@ There is also a package for [ASP.NET Core](https://www.nuget.org/packages/Servic
 
 # Advantages
 
-ServiceSharp enables Attribute decorations for Services throughout your project. You can [check the full demo here](https://github.com/datvm/ServiceSharp/tree/master/Demo/).
+ServiceSharp enables Attribute decorations or Interface for Services throughout your project. You can [check the full demo here](https://github.com/datvm/ServiceSharp/tree/master/Demo/).
 
 # Usage with Dependency Injection (DI)
 
-After installing the packages, you can decorate all your services with the Interface `ServiceSharp.IService`.
+After installing the packages, you can decorate all your services with either the Interface `ServiceSharp.IService` or the Attribute `ServiceAttribute`.
 
 ```
     public class TimeService : IService
@@ -28,6 +28,12 @@ After installing the packages, you can decorate all your services with the Inter
         }
 
     }
+
+	[Service]
+    public class PerRequestCounter
+    {
+		// Other code
+	}
 ```
 
 In your `Configure` method, you can call the `AddServices()` extension method (from `ServiceSharp.AspNetCore` namespace in case Visual Studio does not suggest it for you):
@@ -43,14 +49,14 @@ In your `Configure` method, you can call the `AddServices()` extension method (f
 
 # Service Scope/Lifetime
 
-If you want your `IService` class to be ignored by ServiceSharp, simply decorate it with the `IgnoreAttribute` (from `ServiceSharp` namespace):
+If you want your `IService` implemented classes to be ignored by ServiceSharp, simply decorate it with the `IgnoreAttribute` (from `ServiceSharp` namespace):
 
 ```
     [Ignore]
     public class TimeService : IService
 ```
 
-If you do not specify the Service Scope/Lifetime, ServiceSharp will use the default one stated in `ServiceExtensions.DefaultServiceLifetime` (Scoped as in current version). The other `ServiceLifetime` enum include `Singleton` and `Instance`:
+If you do not specify the Service Scope/Lifetime, ServiceSharp will use the default one stated in `ServiceExtensions.DefaultServiceLifetime` (Scoped as in current version). Other `ServiceLifetime` enum values include `Singleton` and `Instance`:
 
 ```
     [ServiceLifetime(ServiceLifetime.Instance)]
@@ -65,8 +71,9 @@ If you do not specify the Service Scope/Lifetime, ServiceSharp will use the defa
 
 	// No decoration because it is the default one.
 	// You can still decorate it with ServiceLifetime.Scoped value.
-	public class PerRequestCounter : IService
-	{
+	[Service]
+    public class PerRequestCounter
+    {
 	}
 ```
 

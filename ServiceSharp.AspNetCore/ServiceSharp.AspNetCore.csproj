@@ -11,6 +11,7 @@
     <RepositoryUrl>https://github.com/datvm/ServiceSharp</RepositoryUrl>
     <PackageTags>service repository design pattern aspnetcore aspnet</PackageTags>
     <PackageReleaseNotes>https://github.com/datvm/ServiceSharp/releases</PackageReleaseNotes>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

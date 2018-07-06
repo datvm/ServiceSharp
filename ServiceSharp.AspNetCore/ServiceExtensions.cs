@@ -11,6 +11,11 @@ namespace ServiceSharp.AspNetCore
     {
         public const ServiceLifetime DefaultServiceLifetime = ServiceLifetime.Scoped;
 
+        private static readonly Type ignoreType = typeof(IgnoreAttribute);
+        private static readonly Type serviceAttributeType = typeof(ServiceAttribute);
+        private static readonly Type serviceInterface = typeof(IService);
+        private static readonly Type serviceLifetimeAttribute = typeof(ServiceLifetimeAttribute);
+
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             return AddServices(services, ServicesOptions.Build(null));
@@ -20,15 +25,11 @@ namespace ServiceSharp.AspNetCore
         {
             options = options ?? new ServicesOptions();
 
-            var ignoreType = typeof(IgnoreAttribute);
-            var serviceInterface = typeof(IService);
-            var serviceLifetimeAttribute = typeof(ServiceLifetimeAttribute);
-
             foreach (var assembly in options.Assemblies)
             {
                 foreach (var type in assembly.GetTypes())
                 {
-                    if (type.IsClass && serviceInterface.IsAssignableFrom(type))
+                    if (type.IsService())
                     {
                         var lifetime = DefaultServiceLifetime;
 
@@ -58,6 +59,36 @@ namespace ServiceSharp.AspNetCore
             }
 
             return services;
+        }
+
+        private static bool IsService(this Type type)
+        {
+            // Must be a concrete Class
+            if (!type.IsClass && !type.IsAbstract)
+            {
+                return false;
+            }
+
+            var customAttributes = type.GetCustomAttributes(true);
+
+            // No IgnoreAttribute
+            if (customAttributes.Any(q => q is IgnoreAttribute))
+            {
+                return false;
+            }
+
+            // Have either ServiceAttribute or implement IService
+            if (customAttributes.Any(q => q is ServiceAttribute))
+            {
+                return true;
+            }
+
+            if (serviceInterface.IsAssignableFrom(type))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public static IServiceCollection AddServices(this IServiceCollection services, Action<ServicesOptions> optionsBuilder)
