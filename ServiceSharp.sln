@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceSharp", "ServiceShar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceSharp.AspNetCore", "ServiceSharp.AspNetCore\ServiceSharp.AspNetCore.csproj", "{FA10B729-2CDE-4FB6-B023-3669650D577A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{6DD28987-DCF3-45C3-BD06-C51DEBCDD727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceSharp.Demo.AspNetCore", "Demo\ServiceSharp.Demo.AspNetCore\ServiceSharp.Demo.AspNetCore.csproj", "{DC5AB776-623D-45D6-9416-70F2CCB2A1BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{FA10B729-2CDE-4FB6-B023-3669650D577A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA10B729-2CDE-4FB6-B023-3669650D577A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA10B729-2CDE-4FB6-B023-3669650D577A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC5AB776-623D-45D6-9416-70F2CCB2A1BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC5AB776-623D-45D6-9416-70F2CCB2A1BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC5AB776-623D-45D6-9416-70F2CCB2A1BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC5AB776-623D-45D6-9416-70F2CCB2A1BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC5AB776-623D-45D6-9416-70F2CCB2A1BA} = {6DD28987-DCF3-45C3-BD06-C51DEBCDD727}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E053907B-AB68-4A79-84BE-1472D7130060}
