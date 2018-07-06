@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>A tiny utility for Repository-Service pattern for C#</Description>
+    <Copyright>Copyright © Luke Vo 2018</Copyright>
   </PropertyGroup>
 
 </Project>
