@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>A tiny utility for Repository-Service pattern for ASP.NET Core</Description>
+    <Copyright>Copyright © Luke Vo 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/datvm/ServiceSharp/blob/master/LICENSE.MD</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/datvm/ServiceSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/datvm/ServiceSharp</RepositoryUrl>
+    <PackageTags>service repository design pattern aspnetcore aspnet</PackageTags>
+    <PackageReleaseNotes>https://github.com/datvm/ServiceSharp/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
