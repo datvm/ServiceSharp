@@ -3,43 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ServiceSharp.Demo.AspNetCore.Filters;
+using ServiceSharp.Demo.AspNetCore.Services;
 
 namespace ServiceSharp.Demo.AspNetCore.Controllers
 {
-    [Route("api/[controller]")]
+
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+
+        FreshCounter freshCounter;
+        PerRequestCounter perRequestCounter;
+        LifetimeCounter lifetimeCounter;
+        TimeService timeService;
+
+        public ValuesController(FreshCounter freshCounter, PerRequestCounter perRequestCounter, LifetimeCounter lifetimeCounter, TimeService timeService)
         {
-            return new string[] { "value1", "value2" };
+            this.freshCounter = freshCounter;
+            this.perRequestCounter = perRequestCounter;
+            this.lifetimeCounter = lifetimeCounter;
+            this.timeService = timeService;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [TypeFilter(typeof(CounterAttribute))]
+        [Route("test")]
+        public async Task<object> Test()
         {
-            return "value";
+            return new
+            {
+                Fresh = await this.freshCounter.Increase(),
+                PerRequest = await this.perRequestCounter.Increase(),
+                Lifetime = await this.lifetimeCounter.Increase(),
+                Now = this.timeService.GetCurrentTime(),
+            };
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
