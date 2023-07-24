@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace ServiceSharp;
 
-namespace ServiceSharp
+
+[AttributeUsage(AttributeTargets.Class)]
+public class IgnoreAttribute : Attribute
 {
-
-    [AttributeUsage(AttributeTargets.Class)]
-    public class IgnoreAttribute : Attribute
-    {
-    }
-
 }

@@ -1,15 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2035
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceSharp", "ServiceSharp\ServiceSharp.csproj", "{382E4E7E-67AF-40D6-B3F9-C7F35732BB2F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceSharp.AspNetCore", "ServiceSharp.AspNetCore\ServiceSharp.AspNetCore.csproj", "{FA10B729-2CDE-4FB6-B023-3669650D577A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{6DD28987-DCF3-45C3-BD06-C51DEBCDD727}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceSharp.Demo.AspNetCore", "Demo\ServiceSharp.Demo.AspNetCore\ServiceSharp.Demo.AspNetCore.csproj", "{DC5AB776-623D-45D6-9416-70F2CCB2A1BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceSharp", "ServiceSharp\ServiceSharp.csproj", "{382E4E7E-67AF-40D6-B3F9-C7F35732BB2F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{49B59196-532B-4AE5-9978-98F764BAD09F}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,20 +21,9 @@ Global
 		{382E4E7E-67AF-40D6-B3F9-C7F35732BB2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{382E4E7E-67AF-40D6-B3F9-C7F35732BB2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{382E4E7E-67AF-40D6-B3F9-C7F35732BB2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA10B729-2CDE-4FB6-B023-3669650D577A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA10B729-2CDE-4FB6-B023-3669650D577A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA10B729-2CDE-4FB6-B023-3669650D577A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA10B729-2CDE-4FB6-B023-3669650D577A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC5AB776-623D-45D6-9416-70F2CCB2A1BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC5AB776-623D-45D6-9416-70F2CCB2A1BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC5AB776-623D-45D6-9416-70F2CCB2A1BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC5AB776-623D-45D6-9416-70F2CCB2A1BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{DC5AB776-623D-45D6-9416-70F2CCB2A1BA} = {6DD28987-DCF3-45C3-BD06-C51DEBCDD727}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E053907B-AB68-4A79-84BE-1472D7130060}

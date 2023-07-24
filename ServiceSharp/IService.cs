@@ -1,10 +1,4 @@
-﻿using System;
+﻿namespace ServiceSharp;
 
-namespace ServiceSharp
-{
-
-    public interface IService { }
-
-    public interface IService<TInterface> : IService { }
-
-}
+public interface IService { }
+public interface IService<TInterface> : IService { }

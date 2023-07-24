@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace ServiceSharp;
 
-namespace ServiceSharp
+
+[AttributeUsage(AttributeTargets.Class, Inherited = false)]
+public class ServiceAttribute : Attribute
 {
 
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    public class ServiceAttribute : Attribute
+    public Type? As { get; set; }
+
+    public ServiceAttribute() { }
+
+    public ServiceAttribute(Type injectAs)
     {
-
-        public Type As { get; set; }
-
-        public ServiceAttribute() { }
-
-        public ServiceAttribute(Type injectAs)
-        {
-            this.As = injectAs;
-        }
-
+        As = injectAs;
     }
 
 }
