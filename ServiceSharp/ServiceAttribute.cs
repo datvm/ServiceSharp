@@ -5,13 +5,14 @@
 public class ServiceAttribute : Attribute
 {
 
-    public Type? As { get; set; }
+    public Type? ServiceType { get; set; }
+    public ServiceLifetime? Lifetime { get; set; }
 
     public ServiceAttribute() { }
 
     public ServiceAttribute(Type injectAs)
     {
-        As = injectAs;
+        ServiceType = injectAs;
     }
 
 }
