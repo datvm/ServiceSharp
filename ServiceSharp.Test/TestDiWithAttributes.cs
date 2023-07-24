@@ -20,6 +20,23 @@ public class TestDiWithAttributes : BaseTestClass
     }
 
     [Fact]
+    public void ShouldGetExplicitOnly()
+    {
+        var services = Setup();
+
+        var impl4 = services.GetRequiredService<ITestAttr4>();
+        Assert.IsType<ImplAttr456>(impl4);
+
+        var impl5 = services.GetRequiredService<ITestAttr5>();
+        Assert.IsType<ImplAttr456>(impl5);
+
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            services.GetRequiredService<ITestAttr6>();
+        });
+    }
+
+    [Fact]
     public void ShouldIgnore()
     {
         var services = Setup();
@@ -161,6 +178,9 @@ public class TestDiWithAttributes : BaseTestClass
 interface ITestAttr1 { }
 interface ITestAttr2 { }
 interface ITestAttr3 { }
+interface ITestAttr4 { }
+interface ITestAttr5 { }
+interface ITestAttr6 { }
 interface ITestAttrSingleton { int Increase(); }
 interface ITestAttrScoped { int Increase(); }
 interface ITestAttrTransient { int Increase(); }
@@ -170,6 +190,9 @@ class ImplAttr1 : DefaultImplementation, ITestAttr1 { }
 
 [Service]
 class ImplAttr23 : DefaultImplementation, IShouldIgnore, ITestAttr2, ITestAttr3 { }
+
+[Service(typeof(ITestAttr4)), Service(typeof(ITestAttr5))]
+class ImplAttr456 : DefaultImplementation, ITestAttr4, ITestAttr5, ITestAttr6 { }
 
 [Service(Lifetime = ServiceLifetime.Scoped)]
 class ImplScoped : DefaultImplementation, ITestAttrScoped { }

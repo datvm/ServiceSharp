@@ -60,7 +60,7 @@ public class DefaultTypeScanner : ITypeScanner
         {
             var lifetime = attr.ActualLifetime ?? options.DefaultLifetime;
             if (attr.ServiceType is null)
-            {                
+            {
                 foreach (var i in GetInterfaces(t))
                 {
                     yield return new(i, t, lifetime);
@@ -75,20 +75,29 @@ public class DefaultTypeScanner : ITypeScanner
 
     static IEnumerable<ServiceDescriptor> GetTypesDeclaredByInterfaces(Type t, ServiceSharpOptions options)
     {
+        var hasService = false;
+        var hasGenericService = false;
+
         foreach (var i in t.GetInterfaces())
         {
             if (!i.IsAssignableTo(typeof(IService))) { continue; }
 
             if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IService<>))
             {
+                hasGenericService = true;
                 yield return new(i.GetGenericArguments()[0], t, options.DefaultLifetime);
             }
             else if (i == typeof(IService))
             {
-                foreach (var declInterface in GetInterfaces(t))
-                {
-                    yield return new(declInterface, t, options.DefaultLifetime);
-                }
+                hasService = true;
+            }
+        }
+
+        if (!hasGenericService && hasService)
+        {
+            foreach (var declInterface in GetInterfaces(t))
+            {
+                yield return new(declInterface, t, options.DefaultLifetime);
             }
         }
     }

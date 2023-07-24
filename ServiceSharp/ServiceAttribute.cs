@@ -1,7 +1,7 @@
 ﻿namespace ServiceSharp;
 
 
-[AttributeUsage(AttributeTargets.Class, Inherited = false)]
+[AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
 public class ServiceAttribute : Attribute
 {
     public Type? ServiceType { get; set; }
