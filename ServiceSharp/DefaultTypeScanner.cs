@@ -52,13 +52,13 @@ public class DefaultTypeScanner : ITypeScanner
         }
     }
 
-    IEnumerable<ServiceDescriptor> GetTypesDeclaredByAttributes(Type t, ServiceSharpOptions options)
+    static IEnumerable<ServiceDescriptor> GetTypesDeclaredByAttributes(Type t, ServiceSharpOptions options)
     {
         var attrs = t.GetCustomAttributes<ServiceAttribute>(false);
 
         foreach (var attr in attrs)
         {
-            var lifetime = attr.Lifetime ?? options.DefaultLifetime;
+            var lifetime = attr.ActualLifetime ?? options.DefaultLifetime;
             if (attr.ServiceType is null)
             {                
                 foreach (var i in GetInterfaces(t))
@@ -73,13 +73,13 @@ public class DefaultTypeScanner : ITypeScanner
         }
     }
 
-    IEnumerable<ServiceDescriptor> GetTypesDeclaredByInterfaces(Type t, ServiceSharpOptions options)
+    static IEnumerable<ServiceDescriptor> GetTypesDeclaredByInterfaces(Type t, ServiceSharpOptions options)
     {
         foreach (var i in t.GetInterfaces())
         {
             if (!i.IsAssignableTo(typeof(IService))) { continue; }
 
-            if (i == typeof(IService<>))
+            if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IService<>))
             {
                 yield return new(i.GetGenericArguments()[0], t, options.DefaultLifetime);
             }
@@ -98,7 +98,7 @@ public class DefaultTypeScanner : ITypeScanner
         foreach (var i in t.GetInterfaces())
         {
             if (i.IsAssignableTo(typeof(IService)) ||
-                t.GetCustomAttribute<IgnoreAttribute>() is not null)
+                i.GetCustomAttribute<IgnoreAttribute>() is not null)
             {
                 continue;
             }

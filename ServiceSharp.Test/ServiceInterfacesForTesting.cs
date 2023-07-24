@@ -1,50 +1,13 @@
 namespace ServiceSharp.Test;
 
-public interface ITestInterface1
+public class DefaultImplementation
 {
-    int Increase();
-}
+    int counter = 0;
 
-public interface ITestInterface2
-{
-    int Decrease();
+    public int Increase() => ++counter;
+    public int Decrease() => --counter;
+
 }
 
 [Ignore]
-public interface IShouldIgnore
-{}
-
-public class DefaultImpl1 : ITestInterface1, IShouldIgnore
-{
-    int curr = 0;
-
-    public int Increase()
-    {
-        return ++curr;
-    }
-}
-
-public class DefaultImpl2 : ITestInterface2, IShouldIgnore
-{
-    int curr = 0;
-
-    public int Decrease()
-    {
-        return --curr;
-    }
-}
-
-public class DefaultImpl12 : ITestInterface1, ITestInterface2, IShouldIgnore
-{
-    int curr = 0;
-
-    public int Decrease()
-    {
-        return --curr;
-    }
-
-    public int Increase()
-    {
-        return ++curr;
-    }
-}
+public interface IShouldIgnore { }

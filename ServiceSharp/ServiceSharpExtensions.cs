@@ -1,19 +1,26 @@
 ﻿global using System.Reflection;
 global using Microsoft.Extensions.DependencyInjection;
+global using ServiceSharp;
 
-namespace ServiceSharp;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceSharpExtensions
 {
 
     public static IServiceCollection AddServices(this IServiceCollection services) =>
-        services.AddServices(null);
+        services.AddServices(Assembly.GetCallingAssembly(), null);
 
     public static IServiceCollection AddServices(
         this IServiceCollection services,
+        Action<ServiceSharpOptions>? configure) =>
+        services.AddServices(Assembly.GetCallingAssembly(), configure);
+
+    public static IServiceCollection AddServices(
+        this IServiceCollection services,
+        Assembly assembly,
         Action<ServiceSharpOptions>? configure)
     {
-        var options = new ServiceSharpOptions(Assembly.GetCallingAssembly());
+        var options = new ServiceSharpOptions(assembly);
         configure?.Invoke(options);
 
         var asmList = options.AdditionalAssemblies.Prepend(options.Assembly);
