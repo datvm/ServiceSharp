@@ -61,9 +61,16 @@ public class DefaultTypeScanner : ITypeScanner
             var lifetime = attr.ActualLifetime ?? options.DefaultLifetime;
             if (attr.ServiceType is null)
             {
-                foreach (var i in GetInterfaces(t))
+                if (attr is SelfServiceAttribute)
                 {
-                    yield return new(i, t, lifetime);
+                    yield return new(t, t, lifetime);
+                }
+                else
+                {
+                    foreach (var i in GetInterfaces(t))
+                    {
+                        yield return new(i, t, lifetime);
+                    }
                 }
             }
             else
@@ -80,7 +87,7 @@ public class DefaultTypeScanner : ITypeScanner
 
         foreach (var i in t.GetInterfaces())
         {
-            if (!i.IsAssignableTo(typeof(IService))) { continue; }
+            if (!typeof(IService).IsAssignableFrom(i)) { continue; }
 
             if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IService<>))
             {
@@ -106,7 +113,7 @@ public class DefaultTypeScanner : ITypeScanner
     {
         foreach (var i in t.GetInterfaces())
         {
-            if (i.IsAssignableTo(typeof(IService)) ||
+            if (typeof(IService).IsAssignableFrom(i) ||
                 i.GetCustomAttribute<IgnoreAttribute>() is not null)
             {
                 continue;

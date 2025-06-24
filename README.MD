@@ -1,8 +1,9 @@
 # ServiceSharp
 
-ServiceSharp v2.0.0 is released with .NET 6 supports and rewritten from scratch! You no longer need the ASP.NET Core specific package as well.
+ServiceSharp v2.1.0 is released with .NET Standard 2.1 support and new features!  
+v2.0.0 was released with .NET 6 and rewritten from scratch! You no longer need the ASP.NET Core specific package as well.
 
-ServiceSharp is a tiny utility for registering services in .NET Dependency Injection (DI) using **`[Attribute]`** or `Interface`:
+ServiceSharp is a tiny utility for registering services in .NET Dependency Injection (DI) using **`[Attribute]`**, **`[SelfService]`**, or `Interface`:
 
 ## Declare using Attributes
 
@@ -31,6 +32,12 @@ class ImplTransient : ITestAttrTransient { }
 
 [Service(Lifetime = ServiceLifetime.Singleton)]
 class ImplSingleton : ITestAttrSingleton { }
+
+[SelfService] // Register the class as itself (not by interface)
+class SelfServiceClass { }
+
+[SelfService] // Register as itself, not by interface
+class ImplSelfServiceWithInterface : ISelfServiceInterface { }
 ```
 
 ## Declare using Interfaces
@@ -57,13 +64,16 @@ class ImplInterface23 :
 
 [Ignore] // Do not register this class though it implements IService interface
 class ImplInterface3 : 
-    ITestInterface3
+    ITestInterface3,
     IService
 { }
 ```
 
 > **Note**  
 > The lifetime of the service cannot be specified using interface declaration. It uses the value from options instead. The default value is `Scoped`.
+
+> **New in 2.1.0**  
+> Use `[SelfService]` to register a class as itself (not by interface). If the class also implements interfaces, those interfaces are not registered unless you use `[Service]` or interface-based registration.
 
 # Installation
 
@@ -101,5 +111,4 @@ services.AddServices(options => {
 
     // You can also make and specify your own scanner
     options.TypeScanner = new MyTypeScanner();
-});
-```
+});```

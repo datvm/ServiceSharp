@@ -172,6 +172,33 @@ public class TestDiWithAttributes : BaseTestClass
         Assert.NotSame(attr1, attr2);
         Assert.NotSame(attr1, attr3);
     }
+
+    [Fact]
+    public void ShouldGetSelfService()
+    {
+        var services = Setup();
+        var selfService = services.GetRequiredService<SelfServiceClass>();
+        Assert.IsType<SelfServiceClass>(selfService);
+    }
+
+    [Fact]
+    public void ShouldGetSelfServiceWithInterface()
+    {
+        var services = Setup();
+        var selfService = services.GetRequiredService<ImplSelfServiceWithInterface>();
+        Assert.IsType<ImplSelfServiceWithInterface>(selfService);
+    }
+
+    [Fact]
+    public void ShouldNotGetSelfServiceByInterface()
+    {
+        var services = Setup();
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            return services.GetRequiredService<ISelfServiceInterface>();
+        });
+    }
+
 }
 
 
@@ -181,6 +208,7 @@ interface ITestAttr3 { }
 interface ITestAttr4 { }
 interface ITestAttr5 { }
 interface ITestAttr6 { }
+interface ISelfServiceInterface { }
 interface ITestAttrSingleton { int Increase(); }
 interface ITestAttrScoped { int Increase(); }
 interface ITestAttrTransient { int Increase(); }
@@ -202,3 +230,9 @@ class ImplTransient : DefaultImplementation, ITestAttrTransient { }
 
 [Service(Lifetime = ServiceLifetime.Singleton)]
 class ImplSingleton : DefaultImplementation, ITestAttrSingleton { }
+
+[SelfService]
+class SelfServiceClass { }
+
+[SelfService]
+class ImplSelfServiceWithInterface : ISelfServiceInterface { }

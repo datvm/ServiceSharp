@@ -1,20 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<Description>A tiny utility for declaring Dependency Injection (DI) services with Attributes or Interface.</Description>
 		<Copyright>Copyright © Luke Vo 2023</Copyright>
 		<PackageProjectUrl>https://github.com/datvm/ServiceSharp</PackageProjectUrl>
-		<PackageReleaseNotes></PackageReleaseNotes>
 		<RepositoryUrl>https://github.com/datvm/ServiceSharp</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageTags>service;design pattern;di;dependency injection</PackageTags>
-		<Version>2.0.0</Version>
+		<Version>2.1.0</Version>
 		<Title>ServiceSharp - Attributes Declaration for DI</Title>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.MD</PackageReadmeFile>
